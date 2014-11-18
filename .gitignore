@@ -1,0 +1,6 @@
+public/assets/vendor
+node_modules
+.svn
+.idea
+.DS_Store
+*.log

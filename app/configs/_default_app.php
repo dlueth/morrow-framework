@@ -3,10 +3,11 @@
 // If you want to modify defaults for your project (like routing rules), use this file.
 
 return [
-	'security.csp.default-src'		=> "'self' cdnjs.cloudflare.com",
+	'security.csp.default-src'		=> "'self' cdnjs.cloudflare.com cdn.jsdelivr.net",
+	'security.csp.connect-src'		=> "'self' ws://127.0.0.1:35729",
 	// 'security.csp.script-src'	=> "'self'",
 	// 'security.csp.img-src'		=> "'self'",
-	'security.csp.style-src'		=> "'self' 'unsafe-inline' cdnjs.cloudflare.com",
+	'security.csp.style-src'		=> "'self' 'unsafe-inline' cdnjs.cloudflare.com cdn.jsdelivr.net",
 	// 'security.csp.media-src'		=> "'self'",
 	// 'security.csp.object-src'	=> "'self'",
 	// 'security.csp.frame-src'		=> "'self'",

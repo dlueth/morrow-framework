@@ -1,0 +1,24 @@
+{
+  "curly":true,
+  "eqeqeq":true,
+  "immed":true,
+  "latedef":true,
+  "newcap":true,
+  "noarg":true,
+  "sub":true,
+  "undef":true,
+  "boss":true,
+  "eqnull":true,
+  "browser":true,
+  "proto":true,
+  "expr":true,
+  "validthis":true,
+  "scripturl":true,
+  "globals":{
+	"require": true,
+	"define": true,
+	"ActiveXObject": true,
+	"jQuery": false,
+	"ga": true
+  }
+}

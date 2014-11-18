@@ -1,7 +1,7 @@
 {
-    "name": "morrow/framework", 
+    "name": "morrow/mit",
     "type": "project", 
-    "description": "A clean project to start building your awesome app.",
+    "description": "A clean project to start building your awesome app, including some MiT specific tweaks :)",
     "license": "proprietary",
     "require": {
         "php": ">=5.4",

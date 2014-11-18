@@ -24,6 +24,10 @@ RewriteEngine on
 	# RewriteCond %{REMOTE_ADDR} !x.x.x.x
 	# RewriteRule !(maintenance\.htm|.+\.(gif|jpg|css)) /maintenance.htm [R]
 
+# Map versioned asset requests to unversioned path
+# ---------------------------------------------------------------------------------------------
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.+)/assets/\d+.\d+.\d+/(.+)$ $1/assets/$2 [QSA,L]
 
 # Map request to index.php if the file was not found
 # ---------------------------------------------------------------------------------------------
@@ -43,13 +47,66 @@ RewriteRule ^(.+)$ public/$1 [L,QSA]
 # ---------------------------------------------------------------------------------------------
 Options -Indexes
 
+# Add mimetypes frequently missing
+# ---------------------------------------------------------------------------------------------
+AddType application/javascript .js
+AddType application/vnd.ms-fontobject .eot
+AddType application/x-font-ttf .ttf
+AddType application/x-font-woff .woff
+AddType image/svg+xml .svg
+AddType video/ogg .ogv
+AddType video/ogg .ogg
+AddType video/mp4 .mp4
+AddType video/webm .webm
+AddType application/x-shockwave-flash swf
 
 # Deflate static ressources
 # ---------------------------------------------------------------------------------------------
 <Ifmodule mod_deflate.c>
-	AddOutputFilterByType DEFLATE text/html text/plain text/css application/json
-	AddOutputFilterByType DEFLATE text/javascript application/javascript application/x-javascript 
-	AddOutputFilterByType DEFLATE text/xml application/xml text/x-component
+	AddOutputFilterByType DEFLATE text/plain
+	AddOutputFilterByType DEFLATE text/html
+	AddOutputFilterByType DEFLATE text/xml
+	AddOutputFilterByType DEFLATE text/css
+	AddOutputFilterByType DEFLATE text/javascript
+	AddOutputFilterByType DEFLATE application/vnd.ms-fontobject
+	AddOutputFilterByType DEFLATE application/x-font-ttf
+	AddOutputFilterByType DEFLATE application/x-font-woff
+	AddOutputFilterByType DEFLATE image/svg+xml
+	AddOutputFilterByType DEFLATE application/xml
+	AddOutputFilterByType DEFLATE application/xhtml+xml
+	AddOutputFilterByType DEFLATE application/rss+xml
+	AddOutputFilterByType DEFLATE application/json
+	AddOutputFilterByType DEFLATE application/javascript
+	AddOutputFilterByType DEFLATE application/x-javascript
+	AddOutputFilterByType DEFLATE application/json application/javascript
+</IfModule>
+
+# Set long expiration header for static assets
+# ---------------------------------------------------------------------------------------------
+<IfModule mod_expires.c>
+	ExpiresActive On
+	ExpiresDefault "access plus 1 day"
+	ExpiresByType image/x-icon "access plus 1 years"
+	ExpiresByType image/gif "access plus 1 years"
+	ExpiresByType image/jpeg "access plus 1 years"
+	ExpiresByType image/png "access plus 1 years"
+	ExpiresByType text/css "access plus 1 years"
+	ExpiresByType text/javascript "access plus 1 years"
+	ExpiresByType application/javascript "access plus 1 years"
+	ExpiresByType application/x-javascript "access plus 1 years"
+	ExpiresByType application/vnd.ms-fontobject "access plus 1 years"
+	ExpiresByType application/x-font-ttf "access plus 1 years"
+	ExpiresByType application/x-font-woff "access plus 1 years"
+	ExpiresByType image/svg+xml "access plus 1 years"
+
+	Header unset ETag
+	FileETag None
+</IfModule>
+
+# Set IE specific header
+# ---------------------------------------------------------------------------------------------
+<IfModule mod_headers.c>
+	Header set X-UA-Compatible "IE=edge,chrome=1"
 </IfModule>
 
 
