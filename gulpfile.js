@@ -146,21 +146,21 @@ module.exports = gulp;
  * tasks (public)
  **************************************************/
 	gulp.task('bump:patch', function() {
-		gulp.src(config.tasks.bump.watch)
+		return gulp.src(config.tasks.bump.watch)
 			.pipe(plugins.bump({ type: 'patch' }))
-			.pipe(config.tasks.bump.destination);
+			.pipe(gulp.dest(config.tasks.bump.destination));
 	});
 
 	gulp.task('bump:minor', function() {
-		gulp.src(config.tasks.bump.watch)
+		return gulp.src(config.tasks.bump.watch)
 			.pipe(plugins.bump({ type: 'minor' }))
-			.pipe(config.tasks.bump.destination);
+			.pipe(gulp.dest(config.tasks.bump.destination));
 	});
 
 	gulp.task('bump:major', function() {
-		gulp.src(config.tasks.bump.watch)
+		return gulp.src(config.tasks.bump.watch)
 			.pipe(plugins.bump({ type: 'major' }))
-			.pipe(config.tasks.bump.destination);
+			.pipe(gulp.dest(config.tasks.bump.destination));
 	});
 
 	gulp.task('all', [ 'bump' ]);
