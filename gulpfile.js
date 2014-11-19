@@ -1,6 +1,7 @@
 var gulp       = require('gulp'),
 	util       = require('gulp-util'),
 	plugins    = require('gulp-load-plugins')(),
+	del        = require('del'),
 	package, config, patterns = [];
 
 module.exports = gulp;
@@ -67,9 +68,8 @@ module.exports = gulp;
 		loadPackageFile();
 	});
 
-	gulp.task('javascript:all:clean', function() {
-		return gulp.src(config.tasks.javascript.all.clean || [ config.tasks.javascript.all.destination.min + '**/*', config.tasks.javascript.all.destination.max + '**/*' ], { read: false })
-			.pipe(plugins.clean());
+	gulp.task('javascript:all:clean', function(callback) {
+		return del(config.tasks.javascript.all.clean || [ config.tasks.javascript.all.destination.min + '**/*', config.tasks.javascript.all.destination.max + '**/*' ], callback);
 	});
 
 	gulp.task('javascript:all:lint', function() {
@@ -95,9 +95,8 @@ module.exports = gulp;
 			.pipe(gulp.dest(config.tasks.javascript.all.destination.min));
 	});
 
-	gulp.task('less:all:clean', function() {
-		return gulp.src(config.tasks.less.all.clean || [ config.tasks.less.all.destination.min + '**/*', config.tasks.less.all.destination.max + '**/*' ], { read: false })
-			.pipe(plugins.clean());
+	gulp.task('less:all:clean', function(callback) {
+		return del(config.tasks.less.all.clean || [ config.tasks.less.all.destination.min + '**/*', config.tasks.less.all.destination.max + '**/*' ], callback);
 	});
 
 	gulp.task('less:all:build', [ 'less:all:clean' ], function() {
@@ -118,9 +117,8 @@ module.exports = gulp;
 			.pipe(gulp.dest(config.tasks.less.all.destination.min));
 	});
 
-	gulp.task('image:all:clean', function() {
-		return gulp.src(config.tasks.image.all.clean || (config.tasks.image.all.destination + '**/*'), { read: false })
-			.pipe(plugins.clean());
+	gulp.task('image:all:clean', function(callback) {
+		return del(config.tasks.image.all.clean || config.tasks.image.all.destination + '**/*', callback);
 	});
 
 	gulp.task('image:all:build', [ 'image:all:clean' ], function() {
@@ -130,9 +128,8 @@ module.exports = gulp;
 			.pipe(gulp.dest(config.tasks.image.all.destination));
 	});
 
-	gulp.task('html:all:clean', function() {
-		return gulp.src(config.tasks.html.all.clean || (config.tasks.html.all.destination + '**/*'), { read: false })
-			.pipe(plugins.clean());
+	gulp.task('html:all:clean', function(callback) {
+		return del(config.tasks.html.all.clean || config.tasks.html.all.destination + '**/*', callback);
 	});
 
 	gulp.task('html:all:build', [ 'html:all:clean' ], function() {
