@@ -43,13 +43,15 @@ module.exports = gulp;
 	}
 
 	function getDatePatterns() {
-		var date = new Date(),
-			time = ''.concat('0', date.getHours().toString()).slice(-2) + ':' + ''.concat('0', date.getMinutes().toString()).slice(-2) + ':' + ''.concat('0', date.getSeconds().toString()).slice(-2);
+		var date  = new Date(),
+			month = ''.concat('0', (date.getMonth() + 1).toString()).slice(-2),
+			day   = ''.concat('0', date.getDate().toString()).slice(-2),
+			time  = ''.concat('0', date.getHours().toString()).slice(-2) + ':' + ''.concat('0', date.getMinutes().toString()).slice(-2) + ':' + ''.concat('0', date.getSeconds().toString()).slice(-2);
 
 		return [
 			{ pattern: new RegExp('{{gulp:date.year}}', 'g'), replacement: date.getFullYear() },
-			{ pattern: new RegExp('{{gulp:date.month}}', 'g'), replacement: date.getMonth() },
-			{ pattern: new RegExp('{{gulp:date.day}}', 'g'), replacement: date.getDate() },
+			{ pattern: new RegExp('{{gulp:date.month}}', 'g'), replacement: month },
+			{ pattern: new RegExp('{{gulp:date.day}}', 'g'), replacement: day },
 			{ pattern: new RegExp('{{gulp:date.time}}', 'g'), replacement: time }
 		];
 	}
