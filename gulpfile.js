@@ -80,7 +80,7 @@ module.exports = gulp;
 			.pipe(plugins.jshint.reporter('jshint-stylish'));
 	});
 
-	gulp.task('javascript:all:build', [ 'javascript:all:clean', 'javascript:all:lint' ], function() {
+	gulp.task('javascript:all:build', [ 'javascript:all:lint' ], function() {
 		return gulp.src(config.tasks.javascript.all.build || config.tasks.javascript.all.watch)
 			.pipe(plugins.plumber({ errorHandler: handleError}))
 			// max
@@ -101,7 +101,7 @@ module.exports = gulp;
 		return del(config.tasks.less.all.clean || [ config.tasks.less.all.destination.min + '**/*', config.tasks.less.all.destination.max + '**/*' ], callback);
 	});
 
-	gulp.task('less:all:build', [ 'less:all:clean' ], function() {
+	gulp.task('less:all:build', [  ], function() {
 		return gulp.src(config.tasks.less.all.build || config.tasks.less.all.watch)
 			.pipe(plugins.plumber({ errorHandler: handleError}))
 			.pipe(plugins.less({ compress: false }))
@@ -123,7 +123,7 @@ module.exports = gulp;
 		return del(config.tasks.image.all.clean || config.tasks.image.all.destination + '**/*', callback);
 	});
 
-	gulp.task('image:all:build', [ 'image:all:clean' ], function() {
+	gulp.task('image:all:build', [  ], function() {
 		return gulp.src(config.tasks.image.all.build || config.tasks.image.all.watch)
 			.pipe(plugins.plumber({ errorHandler: handleError}))
 			.pipe(plugins.imagemin({ progressive: true, optimizationLevel: 7 }))
@@ -134,7 +134,7 @@ module.exports = gulp;
 		return del(config.tasks.html.all.clean || config.tasks.html.all.destination + '**/*', callback);
 	});
 
-	gulp.task('html:all:build', [ 'html:all:clean' ], function() {
+	gulp.task('html:all:build', [  ], function() {
 		return gulp.src(config.tasks.html.all.build || config.tasks.html.all.watch)
 			.pipe(plugins.frep(patterns))
 			.pipe(plugins.frep(getDatePatterns()))
